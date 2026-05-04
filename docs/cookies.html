@@ -10,19 +10,21 @@
         table { width: 100%; border-collapse: collapse; margin: 20px 0; background: white; }
         th, td { padding: 12px; border: 1px solid #ddd; text-align: left; }
         th { background-color: var(--primary); color: white; }
-        .config-section { background: white; padding: 25px; border-radius: 12px; border: 2px solid var(--primary); }
-        .btn { background: var(--primary); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        .config-section { background: white; padding: 25px; border-radius: 12px; border: 2px solid var(--primary); margin-top: 30px; }
+        .btn { background: var(--primary); color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn-secondary { background: #95a5a6; }
     </style>
 </head>
 <body>
     <h1>Política de Cookies</h1>
-    <p>A FoodLogístic S.A. utilitzem cookies per millorar la navegació i obtenir dades estadístiques.</p>
+    <p>Aquesta política detalla com FoodLogístic S.A. utilitza fitxers de dades per oferir-te un servei personalitzat.</p>
 
-    <h2>Què estàs acceptant?</h2>
+    <h2>Llistat de Cookies utilitzades</h2>
     <table>
         <thead>
             <tr>
-                <th>Tipus</th>
+                <th>Nom</th>
+                <th>Propietat</th>
                 <th>Finalitat</th>
                 <th>Durada</th>
             </tr>
@@ -30,35 +32,39 @@
         <tbody>
             <tr>
                 <td><strong>Tècniques</strong></td>
-                <td>Necessàries per al funcionament del web i recordar el consentiment.</td>
-                <td>Sessió / 1 any</td>
+                <td>Pròpies</td>
+                <td>Gestió del consentiment i sessió.</td>
+                <td>1 any</td>
             </tr>
             <tr>
-                <td><strong>Analítiques</strong></td>
-                <td>Anàlisi estadística de visites (Google Analytics). Ens ajuda a saber quins serveis t'interessen més.</td>
+                <td><strong>_ga (Analítica)</strong></td>
+                <td>Google</td>
+                <td>Anàlisi anònima de visites i rutes a la web.</td>
                 <td>2 anys</td>
-            </tr>
-            <tr>
-                <td><strong>Preferències</strong></td>
-                <td>Recordar l'idioma o configuracions personalitzades.</td>
-                <td>Sessió</td>
             </tr>
         </tbody>
     </table>
 
     <div class="config-section">
-        <h2>Configuració de Cookies</h2>
-        <p>Pots modificar la teva elecció aquí:</p>
-        <label><input type="checkbox" checked disabled> Tècniques (Sempre actives)</label><br><br>
-        <label><input type="checkbox" id="analiticaCheck"> Acceptar Cookies Analítiques</label><br><br>
-        <button class="btn" onclick="save()">Guardar Preferències</button>
+        <h2>Tauler de configuració</h2>
+        <p>Pots retirar el teu consentiment en qualsevol moment:</p>
+        <div style="margin: 20px 0;">
+            <label><input type="checkbox" checked disabled> Tècniques (Obligatòries)</label><br><br>
+            <label><input type="checkbox" id="analiticaCheck"> Permetre Cookies Analítiques</label>
+        </div>
+        <button class="btn" onclick="save()">Guardar i aplicar</button>
+        <button class="btn btn-secondary" onclick="rebutjarTotes()">Rebutjar No Essencials</button>
     </div>
 
     <script>
         function save() {
             const isAnalytic = document.getElementById('analiticaCheck').checked;
-            localStorage.setItem('foodlogistic_cookie_prefs', isAnalytic ? 'full' : 'basic');
-            alert('Configuració guardada. Gràcies per la teva confiança.');
+            localStorage.setItem('cookie_consent', isAnalytic ? 'full' : 'basic');
+            alert('Configuració actualitzada.');
+            window.location.href = 'index.html';
+        }
+        function rebutjarTotes() {
+            localStorage.setItem('cookie_consent', 'basic');
             window.location.href = 'index.html';
         }
     </script>
