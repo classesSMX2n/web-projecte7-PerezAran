@@ -446,15 +446,23 @@
     </div>
 
     <script>
-        function acceptAll() {
-            localStorage.setItem('cookie_consent', 'true');
-            document.getElementById('cookieBanner').classList.remove('show');
-        }
-        window.onload = () => {
-            if (!localStorage.getItem('cookie_consent')) {
-                setTimeout(() => { document.getElementById('cookieBanner').classList.add('show'); }, 1000);
-            }
-        };
+        function handleCookieChoice(choice) {
+    localStorage.setItem('cookie_consent', choice);
+    document.getElementById('cookieBanner').classList.remove('show');
+    if (choice === 'full') {
+        // Aquí podries carregar Google Analytics dinàmicament
+        console.log("Cookies analítiques activades");
+    }
+}
+
+window.onload = () => {
+    // Si no hi ha cap decisió presa, mostrem el banner
+    if (!localStorage.getItem('cookie_consent')) {
+        setTimeout(() => { 
+            document.getElementById('cookieBanner').classList.add('show'); 
+        }, 1000);
+    }
+};
     </script>
 </body>
 </html>
